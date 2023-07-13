@@ -10,6 +10,9 @@ inputs:
     description: Branch to merge from upstream (defaults to downstream branch)
     required: false
     default: "main"
+  downstream_repo:
+    description: URL of gitHub public upstream repo
+    required: true   
   downstream_branch:
     description: Branch to merge into downstream
     required: false
@@ -40,6 +43,7 @@ runs:
   args:
     - ${{ inputs.upstream_repo }}
     - ${{ inputs.upstream_branch }}
+    - ${{ inputs.downstream_repo }}
     - ${{ inputs.downstream_branch }}
     - ${{ inputs.token }}
     - ${{ inputs.fetch_args }}
