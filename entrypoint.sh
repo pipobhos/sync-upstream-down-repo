@@ -4,14 +4,19 @@ set -x
 
 UPSTREAM_REPO=$1
 UPSTREAM_BRANCH=$2
-DOWNSTREAM_BRANCH=$3
-GITHUB_TOKEN=$4
-FETCH_ARGS=$5
-MERGE_ARGS=$6
-PUSH_ARGS=$7
-SPAWN_LOGS=$8
+DOWNSTREAM_REPO=$3
+DOWNSTREAM_BRANCH=$4
+GITHUB_TOKEN=$5
+FETCH_ARGS=$6
+MERGE_ARGS=$7
+PUSH_ARGS=$8
+SPAWN_LOGS=$9
 
 if [[ -z "$UPSTREAM_REPO" ]]; then
+  echo "Missing \$UPSTREAM_REPO"
+  exit 1
+fi
+if [[ -z "$DOWNSTREAM_REPO" ]]; then
   echo "Missing \$UPSTREAM_REPO"
   exit 1
 fi
@@ -41,10 +46,11 @@ git remote add upstream "$UPSTREAM_REPO"
 git fetch ${FETCH_ARGS} upstream
 git remote -v
 
+git remote add downstream "$DOWNSTREAM_REPO"
 git checkout ${DOWNSTREAM_BRANCH}
 
 case ${SPAWN_LOGS} in
-  (true)    echo -n "sync-upstream-repo https://github.com/dabreadman/sync-upstream-repo keeping CI alive."\
+  (true)    echo -n "sync-upstream-repo https://github.com/pipobhos/sync-upstream-down-repo keeping CI alive."\
             "UNIX Time: " >> sync-upstream-repo
             date +"%s" >> sync-upstream-repo
             git add sync-upstream-repo
