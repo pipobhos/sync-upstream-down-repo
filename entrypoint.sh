@@ -35,7 +35,7 @@ echo "UPSTREAM_REPO=$UPSTREAM_REPO"
 
 
 if ! echo "$DOWNSTREAM_REPO" | grep '\.git'; then
-  DOWNSTREAM_REPO="https://github.com/${UPSTREAM_REPO_PATH}.git"
+  DOWNSTREAM_REPO="https://github.com/${DOWNSTREAM_REPO_PATH}.git"
 fi
 
 echo "DOWNSTREAM_REPO=$DOWNSTREAM_REPO"
@@ -57,7 +57,7 @@ git remote add downstream "$DOWNSTREAM_REPO"
 git checkout ${DOWNSTREAM_BRANCH}
 
 case ${SPAWN_LOGS} in
-  (true)    echo -n "sync-upstream-repo https://github.com/pipobhos/sync-upstream-down-repo keeping CI alive."\
+  (true)    echo -n "sync-upstream-down-repo https://github.com/pipobhos/sync-upstream-down-repo keeping CI alive."\
             "UNIX Time: " >> sync-upstream-repo
             date +"%s" >> sync-upstream-repo
             git add sync-upstream-repo
