@@ -33,6 +33,13 @@ fi
 
 echo "UPSTREAM_REPO=$UPSTREAM_REPO"
 
+
+if ! echo "$DOWNSTREAM_REPO" | grep '\.git'; then
+  DOWNSTREAM_REPO="https://github.com/${UPSTREAM_REPO_PATH}.git"
+fi
+
+echo "DOWNSTREAM_REPO=$DOWNSTREAM_REPO"
+
 git clone "https://github.com/${GITHUB_REPOSITORY}.git" work
 cd work || { echo "Missing work dir" && exit 2 ; }
 
